@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신기한 기체의 세계 🎈 - 초등 과학 실험실</title>
+  <!-- Google Fonts: Noto Sans KR & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- JavaScript 파일 연결 -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- 사이드 네비게이션 바 -->
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fa-solid fa-wind logo-icon"></i>
+        <h2>기체 과학실</h2>
+      </div>
+      <nav class="nav-menu">
+        <button class="nav-btn active" data-tab="home">
+          <i class="fa-solid fa-house"></i> <span>홈 (기체란?)</span>
+        </button>
+        <button class="nav-btn" data-tab="temperature">
+          <i class="fa-solid fa-temperature-half"></i> <span>온도와 부피</span>
+        </button>
+        <button class="nav-btn" data-tab="pressure">
+          <i class="fa-solid fa-compress"></i> <span>압력과 부피</span>
+        </button>
+        <button class="nav-btn" data-tab="gases">
+          <i class="fa-solid fa-flask"></i> <span>생활 속 기체</span>
+        </button>
+        <button class="nav-btn" data-tab="quiz">
+          <i class="fa-solid fa-lightbulb"></i> <span>퀴즈 놀이터</span>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <p>초등학교 6학년 과학</p>
+      </div>
+    </aside>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="main-content">
+      <!-- 1. 홈 탭 -->
+      <section id="home" class="tab-content active">
+        <div class="hero-section">
+          <div class="hero-text">
+            <span class="badge">초등 6학년 과학</span>
+            <h1>신기하고 보이지 않는<br><span class="highlight">기체의 세계</span>에 온 것을 환영해요!</h1>
+            <p>우리 주변은 공기로 가득 차 있지만 눈에 보이지 않아요. 기체는 어떤 성질을 가지고 있을까요? 온도와 압력에 따라 기체는 어떻게 변할까요? 흥미진진한 실험을 통해 함께 알아봐요!</p>
+            <button class="btn btn-primary start-btn" onclick="switchTab('temperature')">탐구 시작하기 <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+          <div class="hero-image">
+            <div class="balloon-animation-container">
+              <div class="main-balloon"><i class="fa-solid fa-circle-nodes"></i></div>
+              <div class="bubble bubble-1"></div>
+              <div class="bubble bubble-2"></div>
+              <div class="bubble bubble-3"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card" onclick="switchTab('temperature')">
+            <div class="card-icon icon-red"><i class="fa-solid fa-temperature-high"></i></div>
+            <h3>온도와 부피</h3>
+            <p>뜨거운 물과 차가운 물에 기체를 넣으면 부피가 어떻게 변할까요? 움직이는 입자로 직접 확인해봐요!</p>
+            <span class="card-link">시뮬레이션 해보기 <i class="fa-solid fa-chevron-right"></i></span>
+          </div>
+          <div class="feature-card" onclick="switchTab('pressure')">
+            <div class="card-icon icon-blue"><i class="fa-solid fa-gauge-high"></i></div>
+            <h3>압력과 부피</h3>
+            <p>누르는 힘(압력)이 커지면 기체는 어떻게 될까요? 주사기를 누르며 부피의 비밀을 풀어봐요!</p>
+            <span class="card-link">시뮬레이션 해보기 <i class="fa-solid fa-chevron-right"></i></span>
+          </div>
+          <div class="feature-card" onclick="switchTab('gases')">
+            <div class="card-icon icon-green"><i class="fa-solid fa-cloud"></i></div>
+            <h3>생활 속 기체</h3>
+            <p>산소, 이산화 탄소, 질소... 우리는 매일 어떤 기체들을 만나고 있을까요? 매칭 게임으로 맞춰보세요!</p>
+            <span class="card-link">게임하러 가기 <i class="fa-solid fa-chevron-right"></i></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. 온도와 부피 탭 -->
+      <section id="temperature" class="tab-content">
+        <div class="section-header">
+          <h2><i class="fa-solid fa-temperature-half"></i> 온도가 변할 때 기체의 부피 변화</h2>
+          <p class="subtitle">기체는 온도가 높아지면 부피가 늘어나고, 온도가 낮아지면 부피가 줄어들어요.</p>
+        </div>
+
+        <div class="content-layout">
+          <!-- 시뮬레이터 -->
+          <div class="simulator-container">
+            <div class="simulator-card">
+              <div class="sim-header">
+                <h3>🌡️ 온도 변화 실험실 <span class="exp-badge" id="temp-exp-badge">🎈 기본 풍선</span></h3>
+                <div class="sim-status">온도: <span id="temp-val-display" class="status-num">보통 (20°C)</span></div>
+              </div>
+              <div class="canvas-wrapper">
+                <!-- 입자 애니메이션 캔버스 -->
+                <canvas id="temp-canvas"></canvas>
+                <!-- 온도계 visual -->
+                <div class="thermometer-visual">
+                  <div class="thermometer-tube">
+                    <div id="thermometer-fluid" class="thermometer-fluid"></div>
+                  </div>
+                  <div class="thermometer-bulb"></div>
+                </div>
+              </div>
+              <div class="controls">
+                <div class="slider-group">
+                  <label for="temp-slider"><i class="fa-solid fa-temperature-low"></i> 온도 조절하기 <i class="fa-solid fa-temperature-high"></i></label>
+                  <input type="range" id="temp-slider" min="0" max="100" value="50" class="slider">
+                  <div class="slider-labels">
+                    <span>매우 차가움 (0°C)</span>
+                    <span>보통 (20°C)</span>
+                    <span>매우 뜨거움 (80°C)</span>
+                  </div>
+                </div>
+                <!-- 기본 모드 복귀 버튼 -->
+                <button class="btn btn-secondary btn-sm" id="temp-reset-btn" onclick="changeTempMode('balloon')" style="display: none; margin-top: 15px; width: 100%;">
+                  <i class="fa-solid fa-rotate-left"></i> 기본 풍선 실험으로 돌아가기
+                </button>
+              </div>
+            </div>
+            <!-- 입자 상태 설명 -->
+            <div class="explain-box">
+              <h4><i class="fa-solid fa-magnifying-glass"></i> 기체 알갱이(입자) 관찰 노트</h4>
+              <p id="temp-explanation">온도가 보통일 때 기체 알갱이들은 적당한 속도로 움직이며 벽에 부딪힙니다. 슬라이더를 움직여 온도를 변화시켜 보세요!</p>
+            </div>
+          </div>
+
+          <!-- 실생활 예시 -->
+          <div class="examples-container">
+            <h3>💡 일상생활 속 신기한 예시 <span class="guide-tag">(클릭하면 가상 실험을 해요!)</span></h3>
+            <div class="example-list">
+              <div class="example-item" id="temp-card-pingpong" onclick="changeTempMode('pingpong')">
+                <div class="example-img-placeholder" style="color: #ff6b6b; background: rgba(255, 107, 107, 0.1);">
+                  <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                </div>
+                <div class="example-info">
+                  <h4>찌러진 탁구공 펴기 <span class="try-badge">실험하기 🧪</span></h4>
+                  <p>찌러진 탁구공을 <strong>뜨거운 물</strong>에 넣으면, 탁구공 안의 공기 온도가 올라가 부피가 커지면서 탁구공이 다시 둥글게 펴져요!</p>
+                </div>
+              </div>
+              <div class="example-item" id="temp-card-hotair" onclick="changeTempMode('hotair')">
+                <div class="example-img-placeholder" style="color: #f7b731; background: rgba(247, 183, 49, 0.1);">
+                  <i class="fa-solid fa-parachute-box"></i>
+                </div>
+                <div class="example-info">
+                  <h4>하늘을 나는 열기구 <span class="try-badge">실험하기 🧪</span></h4>
+                  <p>열기구 아래쪽의 가스 버너로 <strong>공기를 데우면</strong> 공기의 부피가 늘어나고 가벼워져서 열기구가 하늘 높이 떠오르게 돼요.</p>
+                </div>
+              </div>
+              <div class="example-item" id="temp-card-petbottle" onclick="changeTempMode('petbottle')">
+                <div class="example-img-placeholder" style="color: #4b7bec; background: rgba(75, 123, 236, 0.1);">
+                  <i class="fa-solid fa-bottle-water"></i>
+                </div>
+                <div class="example-info">
+                  <h4>추운 곳에 둔 페트병 <span class="try-badge">실험하기 🧪</span></h4>
+                  <p>따뜻한 방에 있던 빈 페트병을 <strong>차가운 밖</strong>에 내놓으면, 안의 공기 온도가 내려가 부피가 줄어들면서 페트병이 찌그러져요.</p>
+                </div>
+              </div>
+            </div>
+            <!-- 구글 추가 탐색 버튼 -->
+            <div class="search-more-container" style="margin-top: 15px;">
+              <a href="https://www.google.com/search?q=온도가+변할때+기체의+부피변화의+예" target="_blank" class="btn btn-primary search-more-btn" style="width: 100%; border-radius: 12px; font-size: 15px;">
+                <i class="fa-solid fa-magnifying-glass"></i> 온도가 변할 때 기체 부피 변화 예시 더 조사하기
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 압력과 부피 탭 -->
+      <section id="pressure" class="tab-content">
+        <div class="section-header">
+          <h2><i class="fa-solid fa-compress"></i> 압력이 변할 때 기체의 부피 변화</h2>
+          <p class="subtitle">기체는 누르는 힘(압력)이 세지면 부피가 줄어들고, 누르는 힘이 약해지면 부피가 늘어나요.</p>
+        </div>
+
+        <div class="content-layout">
+          <!-- 시뮬레이터 -->
+          <div class="simulator-container">
+            <div class="simulator-card">
+              <div class="sim-header">
+                <h3>⚖️ 주사기 압축 실험실 <span class="exp-badge" id="press-exp-badge">🍬 마시멜로</span></h3>
+                <div class="sim-status">압력: <span id="press-val-display" class="status-num">보통 (1기압)</span></div>
+              </div>
+              <div class="canvas-wrapper">
+                <!-- 주사기 입자 캔버스 -->
+                <canvas id="press-canvas"></canvas>
+                <!-- 마시멜로 visual (마시멜로 모드에서 활성화) -->
+                <div id="marshmallow-visual" class="marshmallow">
+                  <span>마시멜로</span>
+                </div>
+              </div>
+              <div class="controls">
+                <div class="slider-group">
+                  <label for="press-slider"><i class="fa-solid fa-feather"></i> 압력(누르는 힘) 조절하기 <i class="fa-solid fa-weight-hanging"></i></label>
+                  <input type="range" id="press-slider" min="0" max="100" value="50" class="slider">
+                  <div class="slider-labels">
+                    <span>매우 낮음 (0.2기압)</span>
+                    <span>보통 (1기압)</span>
+                    <span>매우 높음 (5기압)</span>
+                  </div>
+                </div>
+                <!-- 기본 모드 복귀 버튼 -->
+                <button class="btn btn-secondary btn-sm" id="press-reset-btn" onclick="changePressMode('marshmallow')" style="display: none; margin-top: 15px; width: 100%;">
+                  <i class="fa-solid fa-rotate-left"></i> 기본 마시멜로 실험으로 돌아가기
+                </button>
+              </div>
+            </div>
+            <!-- 입자 상태 설명 -->
+            <div class="explain-box">
+              <h4><i class="fa-solid fa-magnifying-glass"></i> 기체 알갱이(입자) 관찰 노트</h4>
+              <p id="press-explanation">압력이 보통일 때 기체 알갱이들은 골고루 흩어져 있습니다. 피스톤을 눌러서 압력을 높이거나 당겨서 낮춰보세요!</p>
+            </div>
+          </div>
+
+          <!-- 실생활 예시 -->
+          <div class="examples-container">
+            <h3>💡 일상생활 속 신기한 예시 <span class="guide-tag">(클릭하면 가상 실험을 해요!)</span></h3>
+            <div class="example-list">
+              <div class="example-item" id="press-card-snackbag" onclick="changePressMode('snackbag')">
+                <div class="example-img-placeholder" style="color: #26de81; background: rgba(38, 222, 129, 0.1);">
+                  <i class="fa-solid fa-mountain"></i>
+                </div>
+                <div class="example-info">
+                  <h4>높은 산 위 과자봉지 <span class="try-badge">실험하기 🧪</span></h4>
+                  <p>높은 산에 올라가면 공기가 희박해져서 <strong>압력이 낮아집니다.</strong> 주위 압력이 낮아지면 과자봉지 속 기체 부피가 늘어나 봉지가 빵빵해져요!</p>
+                </div>
+              </div>
+              <div class="example-item" id="press-card-marshmallow" onclick="changePressMode('marshmallow')">
+                <div class="example-img-placeholder" style="color: #a55eea; background: rgba(165, 94, 234, 0.1);">
+                  <i class="fa-solid fa-syringe"></i>
+                </div>
+                <div class="example-info">
+                  <h4>주사기 속 마시멜로 <span class="try-badge">실험하기 🧪</span></h4>
+                  <p>밀폐된 주사기를 세게 누르면(<strong>압력 증가</strong>), 주사기 안의 마시멜로 속 공기 방울들이 수축하여 마시멜로가 쪼그라들어요.</p>
+                </div>
+              </div>
+              <div class="example-item" id="press-card-bubble" onclick="changePressMode('bubble')">
+                <div class="example-img-placeholder" style="color: #45aaf2; background: rgba(69, 170, 242, 0.1);">
+                  <i class="fa-solid fa-person-swimming"></i>
+                </div>
+                <div class="example-info">
+                  <h4>물속에서 올라오는 공기방울 <span class="try-badge">실험하기 🧪</span></h4>
+                  <p>잠수부가 물속에서 내뿜은 공기방울은 위로 올라갈수록 물의 압력(수압)이 <strong>낮아지므로</strong> 부피가 점점 커지며 올라와요.</p>
+                </div>
+              </div>
+            </div>
+            <!-- 구글 추가 탐색 버튼 -->
+            <div class="search-more-container" style="margin-top: 15px;">
+              <a href="https://www.google.com/search?q=압력이+변할때+기체의+부피변화의+예" target="_blank" class="btn btn-primary search-more-btn" style="width: 100%; border-radius: 12px; font-size: 15px;">
+                <i class="fa-solid fa-magnifying-glass"></i> 압력이 변할 때 기체 부피 변화 예시 더 조사하기
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 생활 속 기체 탭 -->
+      <section id="gases" class="tab-content">
+        <div class="section-header">
+          <h2><i class="fa-solid fa-flask"></i> 우리 주변에서 이용되는 기체들</h2>
+          <p class="subtitle">보이지 않지만 각 기체들은 자신만의 아주 특별한 성질을 이용해 우리 생활 곳곳에 사용돼요.</p>
+        </div>
+
+        <div class="game-instruction-card">
+          <h3>🎮 기체 쓰임새 짝 맞추기 게임</h3>
+          <p>왼쪽의 <strong>기체 카드</strong>를 먼저 선택하고, 그 기체가 우리 생활 속 어디에 쓰이는지 오른쪽의 <strong>성질/쓰임새 카드</strong>를 찾아 클릭해 보세요!</p>
+          <div class="game-score">
+            <span>성공 횟수: <strong id="match-score">0</strong> / 5</span>
+            <button id="reset-game-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate-right"></i> 다시 하기</button>
+          </div>
+        </div>
+
+        <div class="game-container">
+          <!-- 기체 카드 리스트 (좌측) -->
+          <div class="game-column" id="gas-cards-container">
+            <!-- JS로 로드 예정 -->
+          </div>
+          <!-- 쓰임새 카드 리스트 (우측) -->
+          <div class="game-column" id="usage-cards-container">
+            <!-- JS로 로드 예정 -->
+          </div>
+        </div>
+
+        <!-- 기체 상세 학습 카드 -->
+        <div class="gases-learning-grid">
+          <h3>📚 기체 백과사전</h3>
+          <div class="gas-details-grid">
+            <div class="gas-detail-card">
+              <div class="gas-title-badge oxygen">산소 (O₂)</div>
+              <p>생물이 숨을 쉴 때 꼭 필요하며, 다른 물질이 타는 것을 도와요. 병원의 산소 호흡기나 제철소에서 금속을 가공할 때 유용하게 쓰인답니다.</p>
+            </div>
+            <div class="gas-detail-card">
+              <div class="gas-title-badge nitrogen">질소 (N₂)</div>
+              <p>공기 중에 가장 많이 들어있는(약 78%) 기체로, 다른 물질과 쉽게 반응하지 않아요. 그래서 과자봉지 속에 질소를 채워 과자가 부서지거나 상하는 것을 막아줘요.</p>
+            </div>
+            <div class="gas-detail-card">
+              <div class="gas-title-badge co2">이산화 탄소 (CO₂)</div>
+              <p>스스로 타지 않고 불을 끄는 성질이 있어서 소화기에 들어있어요. 톡 쏘는 탄산음료나 시원함을 유지하는 드라이아이스로도 많이 쓰여요.</p>
+            </div>
+            <div class="gas-detail-card">
+              <div class="gas-title-badge helium">헬륨 (He)</div>
+              <p>공기보다 훨씬 가볍고 불에 전혀 타지 않아서 매우 안전해요. 놀이공원의 풍선이나 하늘에 띄우는 비행선에 쓰이고, 마시면 목소리가 톤업돼 변하는 재밌는 기체예요.</p>
+            </div>
+            <div class="gas-detail-card">
+              <div class="gas-title-badge neon">네온 (Ne)</div>
+              <p>전기를 걸어주면 아주 예쁘고 밝은 붉은색 빛을 내는 특이한 성질이 있어요. 그래서 밤거리를 화려하게 밝히는 광고 간판(네온사인)에 유용하게 이용돼요.</p>
+            </div>
+          </div>
+          <!-- 구글 추가 탐색 버튼 -->
+          <div class="search-more-container" style="margin-top: 30px; text-align: center;">
+            <a href="https://www.google.com/search?q=일상생활+속+기체의+종류와+성질" target="_blank" class="btn btn-primary search-more-btn" style="width: 100%; max-width: 500px; margin: 0 auto; border-radius: 12px; font-size: 15px;">
+              <i class="fa-solid fa-magnifying-glass"></i> 일상생활 속 기체의 종류와 성질 더 조사하기
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. 퀴즈 놀이터 탭 -->
+      <section id="quiz" class="tab-content">
+        <div class="section-header">
+          <h2><i class="fa-solid fa-lightbulb"></i> 재미있는 퀴즈 놀이터</h2>
+          <p class="subtitle">오늘 탐구한 재미있는 기체의 성질들을 퀴즈로 풀어보고 실력을 뽐내보세요!</p>
+        </div>
+
+        <div class="quiz-container">
+          <!-- 퀴즈 시작 화면 -->
+          <div id="quiz-start-screen" class="quiz-screen active">
+            <div class="quiz-intro">
+              <i class="fa-solid fa-trophy intro-icon"></i>
+              <h3>도전! 기체 박사 퀴즈</h3>
+              <p>총 5개의 객관식 문제가 출제됩니다. 모두 맞히면 칭호가 주어져요!</p>
+              <button class="btn btn-primary btn-lg" onclick="startQuiz()">퀴즈 시작하기 <i class="fa-solid fa-play"></i></button>
+            </div>
+          </div>
+
+          <!-- 퀴즈 진행 화면 -->
+          <div id="quiz-play-screen" class="quiz-screen">
+            <div class="quiz-progress-bar">
+              <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+            </div>
+            <div class="quiz-status">
+              <span>문제 <strong id="current-question-num">1</strong> / 5</span>
+              <span>점수: <strong id="quiz-score-display">0</strong>점</span>
+            </div>
+            <div class="quiz-question-box">
+              <h3 id="quiz-question-text">여기에 퀴즈 질문이 들어갑니다.</h3>
+            </div>
+            <div class="quiz-options-container" id="quiz-options-container">
+              <!-- JS로 옵션 로드 예정 -->
+            </div>
+            <!-- 정오답 피드백 -->
+            <div id="quiz-feedback" class="quiz-feedback-box">
+              <span class="feedback-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <p id="quiz-feedback-text">정답입니다! 설명 설명</p>
+              <button class="btn btn-primary" id="next-question-btn" onclick="nextQuestion()">다음 문제로 <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <!-- 퀴즈 결과 화면 -->
+          <div id="quiz-result-screen" class="quiz-screen">
+            <div class="quiz-result-box">
+              <div id="result-icon-container">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <h3 id="result-title">훌륭해요! 기체 탐험가</h3>
+              <p>내 정답 점수: <span id="result-score" class="result-score-highlight">80점</span></p>
+              <p id="result-message">정말 멋진 실력이네요! 기체의 성질을 완벽히 마스터해보세요.</p>
+              <div class="result-buttons">
+                <button class="btn btn-primary" onclick="restartQuiz()"><i class="fa-solid fa-rotate-right"></i> 다시 도전하기</button>
+                <button class="btn btn-secondary" onclick="switchTab('home')"><i class="fa-solid fa-house"></i> 홈으로 이동</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
